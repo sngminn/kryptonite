@@ -2,9 +2,9 @@
 
 ## Phase 0: Environment & Infrastructure (기반)
 
-- 🚧 **Shell Script Setup**: `setup.sh` (환경변수 생성)
-- ⬜ **Dockerization**: `Dockerfile` & `docker-compose.yml`
-- ⬜ **Git Workflow**: Custom `pre-commit` hook
+- [x] **Shell Script Setup**: `setup.sh` (환경변수 생성) ✅
+- [x] **Dockerization**: `Dockerfile` & `docker-compose.yml` ✅
+- [ ] **Git Workflow**: Custom `pre-commit` hook ⬜
 
 ## Phase 1: Core Concepts (바닐라 & 기초)
 
