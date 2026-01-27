@@ -8,7 +8,7 @@
 
 ## Phase 1: Core Concepts (바닐라 & 기초)
 
-- ⬜ **State Management from Scratch**: `createStore.ts`, `useStore.ts`, `useCustomState`
+- [/] **State Management from Scratch**: `createStore.ts` (완료), `useStore.ts` (진행 중) 🚧, `useCustomState`
 - ⬜ **Network Layer**: `fetchClient.ts` (Interceptor)
 
 ## Phase 2: React Deep Dive (심화)
@@ -25,7 +25,7 @@
 
 ## Phase 4: Quality Assurance (품질)
 
-- ⬜ **Vitest**: Unit Testing
+- [/] **Vitest**: Unit Testing (createStore.ts 시작) 🚧
 - ⬜ **Storybook**: Component Documentation
 
 ## Phase 5: Deployment (DevOps)
