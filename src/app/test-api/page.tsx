@@ -7,7 +7,9 @@ export default async function TextApi() {
     <main>
       <ul>
         {data.cards.map((card) => (
-          <li key={card.id}>{card.name}</li>
+          <li key={card.id}>
+            {card.name} / {card.image}
+          </li>
         ))}
       </ul>
     </main>
