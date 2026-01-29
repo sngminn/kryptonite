@@ -6,10 +6,14 @@
 - [x] **Dockerization**: `Dockerfile` & `docker-compose.yml` ✅
 - [ ] **Git Workflow**: Custom `pre-commit` hook ⬜
 
+## Phase 1: Core Concepts - 성공 (createStore, useStore, fetchClient, OAuth 연동)
+
+- [ ] Phase 2: React Deep Dive - 시작 (UI 아키텍처 및 심화 훅)
+
 ## Phase 1: Core Concepts (바닐라 & 기초)
 
-- [/] **State Management from Scratch**: `createStore.ts` (완료), `useStore.ts` (진행 중) 🚧, `useCustomState`
-- ⬜ **Network Layer**: `fetchClient.ts` (Interceptor)
+- [x] **State Management from Scratch**: `createStore.ts` (완료), `useStore.ts` (완료) ✅
+- [x] **Network Layer**: `fetchClient.ts` (Interceptor, OAuth, Cache 완료) ✅
 
 ## Phase 2: React Deep Dive (심화)
 
