@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useStore } from "@/lib/useStore";
-import { counterStore } from "@/store/counterStore";
+import { useStore } from '@/lib/useStore';
+import { counterStore } from '@/store/counterStore';
 
 function CounterDisplay() {
   const count = useStore(counterStore);

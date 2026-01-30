@@ -1,6 +1,6 @@
-"use server";
+'use server';
 
-import { fetchClient } from "@/lib/fetchClient";
+import { fetchClient } from '@/lib/fetchClient';
 
 export async function fetchCardsAction(page: number, textFilter: string) {
   return await fetchClient<any>(

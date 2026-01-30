@@ -1,7 +1,6 @@
-import { getAccessToken } from "./auth";
+import { getAccessToken } from './auth';
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "https://kr.api.blizzard.com/hearthstone";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://kr.api.blizzard.com/hearthstone';
 
 export class ApiError extends Error {
   constructor(
@@ -11,18 +10,15 @@ export class ApiError extends Error {
     public body?: unknown,
   ) {
     super(message);
-    this.name = "ApiError";
+    this.name = 'ApiError';
   }
 }
 
-export async function fetchClient<T>(
-  url: string,
-  options: RequestInit = {},
-): Promise<T> {
+export async function fetchClient<T>(url: string, options: RequestInit = {}): Promise<T> {
   const fullUrl = `${BASE_URL}${url}`;
   const token = await getAccessToken();
   const defaultHeaders = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`,
   };
 
@@ -37,7 +33,7 @@ export async function fetchClient<T>(
     throw new ApiError(
       response.status,
       response.statusText,
-      errorBody.message || "API 요청 실패",
+      errorBody.message || 'API 요청 실패',
       errorBody,
     );
   }

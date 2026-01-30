@@ -1,67 +1,29 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { fetchCardsAction } from "./actions";
-import type { Card } from "@/types/card.type";
 import CardList from "./components/CardList";
+import ErrorBoundary from "@/components/common/ErrorBoundary";
+import useCardSearch from "./hooks/useCardSearch";
+import Spinner from "@/components/common/Spinner";
 
 export default function Cards() {
-  const [cards, setCards] = useState<Card[]>([]);
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
-  const triggerRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        setPage((prev) => prev + 1);
-      }
-    });
-
-    if (triggerRef.current) {
-      observer.observe(triggerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    setPage(1);
-    setCards([]);
-  }, [search]);
-
-  useEffect(() => {
-    let isCurrent = true;
-
-    const timer = setTimeout(
-      async () => {
-        const data = await fetchCardsAction(page, search);
-
-        if (isCurrent) {
-          if (page === 1) {
-            setCards(data.cards);
-          } else {
-            setCards((prev) => [...prev, ...(data.cards || [])]);
-          }
-        }
-      },
-      page === 1 ? 500 : 0,
-    );
-
-    return () => {
-      isCurrent = false;
-      clearTimeout(timer);
-    };
-  }, [search, page]);
-
+  const { triggerRef, cards, setSearch, isLoading, error } = useCardSearch();
   return (
-    <main>
-      <input
-        type="text"
-        placeholder="카드 검색..."
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <CardList cards={cards} />
+    <main className="space-y-4 p-4">
+      <div className="flex gap-2">
+        <input
+          type="text"
+          className="flex-1 rounded border p-2"
+          placeholder="카드 검색..."
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+
+      <ErrorBoundary>
+        {error && <span>{error}</span>}
+        <CardList cards={cards} />
+        {isLoading && <Spinner />}
+      </ErrorBoundary>
+
       <div ref={triggerRef} />
     </main>
   );

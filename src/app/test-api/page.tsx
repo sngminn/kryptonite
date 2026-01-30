@@ -1,7 +1,7 @@
-import { fetchClient } from "@/lib/fetchClient";
+import { fetchClient } from '@/lib/fetchClient';
 
 export default async function TextApi() {
-  const data = await fetchClient<any>("/cards?locale=ko_KR&pageSize=30");
+  const data = await fetchClient<any>('/cards?locale=ko_KR&pageSize=30');
 
   return (
     <main>

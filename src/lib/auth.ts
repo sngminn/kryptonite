@@ -1,4 +1,4 @@
-import { ApiError } from "./fetchClient";
+import { ApiError } from './fetchClient';
 
 const CLIENT_ID = process.env.BLIZZARD_CLIENT_ID;
 const CLIENT_SECRET = process.env.BLIZZARD_CLIENT_SECRET;
@@ -9,15 +9,15 @@ export async function getAccessToken() {
   const now = Date.now();
   if (cachedToken && now < tokenExpiryTime) return cachedToken;
 
-  const auth = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString("base64");
+  const auth = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64');
 
-  const response = await fetch("https://oauth.battle.net/token", {
-    method: "POST",
+  const response = await fetch('https://oauth.battle.net/token', {
+    method: 'POST',
     headers: {
       Authorization: `Basic ${auth}`,
-      "Content-Type": "application/x-www-form-urlencoded",
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: "grant_type=client_credentials",
+    body: 'grant_type=client_credentials',
   });
 
   if (!response.ok) {
@@ -26,7 +26,7 @@ export async function getAccessToken() {
     throw new ApiError(
       response.status,
       response.statusText,
-      errorBody.error_description || errorBody.error || "토큰 발급 실패",
+      errorBody.error_description || errorBody.error || '토큰 발급 실패',
       errorBody,
     );
   }

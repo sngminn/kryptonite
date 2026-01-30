@@ -1,16 +1,11 @@
-import Image from "next/image";
-import type { Card } from "@/types/card.type";
+import Image from 'next/image';
+import type { Card } from '@/types/card.type';
 
 export function CardItem({ card }: { card: Card }) {
   return (
     <li key={card.id} className="flex flex-col items-center justify-center">
       <div className="relative aspect-2/3 w-32">
-        <Image
-          alt={`${card.name} 이미지`}
-          src={card.image}
-          fill
-          className="object-contain"
-        />
+        <Image alt={`${card.name} 이미지`} src={card.image} fill className="object-contain" />
       </div>
       <span>{card.name}</span>
     </li>
