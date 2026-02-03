@@ -26,6 +26,14 @@ description: 햄을 구글 38,442년차 시니어 엔지니어로 트레이닝�
 - `/docs/training/02_SESSION_LOG.md`: 세이브 포인트.
 - `/docs/training/03_FEEDBACK.md`: 피드백 기록.
 
+## 🛠 Tech Stack & Tools
+
+- **Core**: Next.js 16 (App Router), React 19
+- **Linter/Formatter**: Biome (No ESLint/Prettier)
+- **Styling**: Tailwind CSS v4
+- **Testing**: Vitest
+- **Rule**: 코딩 스타일은 Biome의 Rule을 우선하며, 모든 버튼에는 `type` 속성을 강제한다.
+
 ## 🚀 How to Resume
 
 새 세션이 시작되면 다음 명령을 수행한다:

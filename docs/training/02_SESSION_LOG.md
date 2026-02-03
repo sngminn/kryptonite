@@ -12,15 +12,24 @@
 
 - **Status**: ✅ Phase 1 완료: `fetchClient`와 `auth.ts` 연동 성공. OAuth 리전 문제 및 엔드포인트 중첩 주소 문제를 해결하며 실제 데이터 수급 확인.
 
-## 2026-01-29
+## 2026-01-30 (Phase 2 완료)
 
-- **Status**: 🚧 Phase 2 진행 중 - 리액트 심화 및 실전 아키텍처
+- **Status**: ✅ Phase 2 완료 - React Deep Dive 졸업
 - **Successes**:
-  - **Server Actions**: `"use client"` 컴포넌트에서 API Secret Key를 직접 읽을 수 없는 문제를 Server Action(`actions.ts`) 도입으로 해결. 보안과 편리함을 동시에 잡는 법 습득.
-  - **Advanced Search**: `useEffect` Cleanup과 `setTimeout`을 활용한 Debounce 로직 구현. Race Condition 방지를 위한 `isCurrent` 플래그 활용 숙지.
-  - **Infinite Scroll**: `Intersection Observer` API를 활용하여 하단 스캔 시 자동으로 다음 페이지 데이터를 Append하는 로직 완성.
-  - **Refactoring**: 거대한 `page.tsx`를 `CardList`, `CardItem`으로 분리하여 관심사 분리(SRP) 달성.
-- **Failures**:
-  - 초기 로딩 시 검색 Debounce가 겹쳐서 발생하는 중복 요청 문제와 레이스 컨디션을 경험했으나 `isCurrent`와 조건부 딜레이 로직으로 해결.
-- **Takeaway**: "Client Component에서는 절대 Secret을 다룰 수 없다"는 Next.js의 보안 모델을 몸소 체험함.
-- **Next Step**: Error Boundary 구현을 통한 회복탄력성 강화 및 등급별 UI 스타일링.
+  - **Error Boundary**: `componentDidCatch`와 `getDerivedStateFromError`를 이해하고 클래스 컴포넌트로 직접 구현.
+  - **Async Error Handling**: `try-catch`와 `state` 패턴을 사용하여 비동기 요청 실패 시 우아하게 처리하는 UI 구현.
+  - **Refactoring**: 비대해진 `page.tsx`에서 로직을 `useCardSearch.ts` 커스텀 훅으로 분리하여 **관심사의 분리(SoC)** 실현.
+  - **UX Improvement**: `Spinner` 컴포넌트를 제작하고 로직 위치를 조정하여 사용자 경험 개선.
+- **Takeaway**:
+  - "ErrorBoundary는 비동기 함수(useEffect 내의 fetch 등)에서 발생한 에러를 잡지 못한다." -> `try-catch`의 필연성 체득.
+  - "Custom Hook은 단순한 코드 쪼개기가 아니라, 도메인 로직의 캡슐화다."
+- **Next Step**: Phase 3 진입 - 인증(Authentication) 및 서버 상태 관리(Tanstack Query) 맛보기.
+
+## 2026-02-03 (Reboot Complete)
+
+- **Status**: ✅ 폐관 수련(Reboot) 완료 - 기초 근육 강화 성공
+- **Achievements**:
+  - `fetchClient`, `createStore`, `useStore`, `ErrorBoundary`, `CardList/Item`, `Infinite Scroll`, `Debounce`, `Custom Hook` 등 핵심 로직을 백지 상태에서 재구현함.
+  - **Type Safety**: `withRetry` 재구현 과정을 통해 제네릭과 타입 안전성 중요성 체득.
+  - **Resilience**: Stale-while-revalidate 개념을 이해하고 에러 핸들링 전략 수정.
+- **Ready for**: Phase 3 (Modern Tech Stack) - 이제 '맨땅 헤딩' 그만하고 '문명의 이기'를 맛볼 차례.

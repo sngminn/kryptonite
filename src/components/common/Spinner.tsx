@@ -8,7 +8,7 @@ export default function Spinner({
   text = "로딩중...",
 }: Props) {
   return (
-    <div>
+    <div className="flex w-full justify-center">
       <svg
         aria-hidden="true"
         className="h-8 w-8 animate-spin fill-amber-400 text-neutral-tertiary"

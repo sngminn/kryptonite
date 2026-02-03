@@ -1,4 +1,5 @@
-import './globals.css';
+import { QueryProvider } from "@/providers/query-provider";
+import "./globals.css";
 
 export default function RootLayout({
   children,
@@ -6,8 +7,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`bg-black antialiased`}>{children}</body>
+    <html lang="ko">
+      <body className={`bg-black antialiased`}>
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }
