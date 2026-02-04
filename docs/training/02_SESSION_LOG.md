@@ -33,3 +33,19 @@
   - **Type Safety**: `withRetry` 재구현 과정을 통해 제네릭과 타입 안전성 중요성 체득.
   - **Resilience**: Stale-while-revalidate 개념을 이해하고 에러 핸들링 전략 수정.
 - **Ready for**: Phase 3 (Modern Tech Stack) - 이제 '맨땅 헤딩' 그만하고 '문명의 이기'를 맛볼 차례.
+
+## 2026-02-04 (Phase 3 Start: Logic-First React Query)
+
+- **Status**: 🚧 Phase 3 진입 - React Query Logic-First Implementation
+- **Achievements**:
+  - **Logic-First Protocol**: `SKILL.md`에 새로운 멘토링 프로토콜 정립 (Why -> Naive -> Evolution).
+  - **Migration**: `useCardSearch.ts`를 React Query로 완벽 전환.
+    - **Step 1**: Basic Fetch (`fetchCardsAction` 활용하여 Client Env 문제 해결).
+    - **Step 2**: Query Key & State (`useState` + `["cards", search]`).
+    - **Step 3**: Debounce (`useDebounce` Custom Hook 직접 구현 및 `ignore` 패턴 학습).
+    - **Step 4**: Infinite Scroll (`useInfiniteQuery` + `flatMap` + `useIntersection` Native Hook 구현).
+- **Takeaway**:
+  - "React Query의 `queryFn`은 Context 객체를 주입하므로, 인자가 불일치할 경우 래퍼 함수(`() => func()`)가 필수다."
+  - "`useInfiniteQuery`의 데이터 구조는 `pages` 배열(2차원)이므로 `flatMap`으로 평탄화해야 한다."
+  - "Server Action은 클라이언트 컴포넌트에서 서버 환경변수를 안전하게 쓰기 위한 '택배 기사'다."
+- **Next Step**: Error/Loading UI Refinement (Skeleton 등) 및 Mutation 맛보기.

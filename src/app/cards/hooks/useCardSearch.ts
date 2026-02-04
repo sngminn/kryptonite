@@ -1,64 +1,44 @@
-"use client";
-import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
-import { useEffect, useRef, useState } from "react";
-import { type CardsResponse, fetchCardsAction } from "../actions";
-
-function useDebounce<T>(value: T, delay: 500): T {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const handler = setTimeout(() => setDebouncedValue(value), delay);
-    return () => clearTimeout(handler);
-  }, [value, delay]);
-
-  return debouncedValue;
-}
+import { useEffect, useState } from "react";
+import { useDebounce } from "@/hooks/useDebounce";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { fetchCardsAction } from "../actions";
+import { useIntersection } from "./useIntersection";
 
 export default function useCardSearch() {
   const [search, setSearch] = useState("");
-  const debouncedSearch = useDebounce(search, 500);
-  const triggerRef = useRef<HTMLDivElement>(null);
-
+  const debouncedSearch = useDebounce(search, 300);
   const {
     data,
+    isLoading,
+    error,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    status,
-    error,
-  } = useInfiniteQuery<CardsResponse>({
+  } = useInfiniteQuery({
     queryKey: ["cards", debouncedSearch],
-    queryFn: ({ pageParam }) =>
-      fetchCardsAction((pageParam as number) || 1, debouncedSearch),
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage.cards.length > 0 ? allPages.length + 1 : undefined;
-    },
+    queryFn: ({ pageParam }) => fetchCardsAction(pageParam, debouncedSearch),
     initialPageParam: 1,
-    placeholderData: keepPreviousData,
-    staleTime: 1000 * 60 * 60 * 24,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.page < lastPage.pageCount) {
+        return lastPage.page + 1;
+      }
+      return undefined;
+    },
   });
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 1.0 },
-    );
-    if (triggerRef.current) observer.observe(triggerRef.current);
-    return () => observer.disconnect();
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+  const { ref, isIntersecting } = useIntersection();
 
-  const cards = data?.pages.flatMap((page) => page.cards) || [];
+  useEffect(() => {
+    if (isIntersecting && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [isIntersecting, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return {
-    cards,
-    triggerRef,
-    setSearch,
-    isLoading: status === "pending",
-    isFetchingNext: isFetchingNextPage,
+    cards: data?.pages.flatMap((page) => page.cards) || [],
+    isLoading,
     error: error?.message,
+    setSearch,
+    triggerRef: ref,
   };
 }
