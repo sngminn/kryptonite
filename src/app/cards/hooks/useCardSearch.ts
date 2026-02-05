@@ -14,6 +14,7 @@ export default function useCardSearch() {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    refetch,
   } = useInfiniteQuery({
     queryKey: ["cards", debouncedSearch],
     queryFn: ({ pageParam }) => fetchCardsAction(pageParam, debouncedSearch),
@@ -40,5 +41,7 @@ export default function useCardSearch() {
     error: error?.message,
     setSearch,
     triggerRef: ref,
+    isFetchingNextPage,
+    refetch,
   };
 }

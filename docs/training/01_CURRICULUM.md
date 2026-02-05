@@ -28,8 +28,8 @@
 ## Phase 3: Modern Tech Stack (실전)
 
 - ⬜ **Authentication**: Middleware, `Jose` JWT Handling
-- [/] **Server State**: Tanstack Query (Infinite Scroll, Optimistic Update) 🚧
-- ⬜ **Forms**: RHF + Zod (Complex Validation)
+- [x] **Server State**: Tanstack Query (Infinite Scroll, Loading/Error UX) ✅
+- [x] **Forms**: RHF + Zod (Search Validation) ✅
 - ⬜ **Client State**: Zustand (Persist)
 
 ## Phase 4: Quality Assurance (품질)

@@ -4,24 +4,33 @@ import CardList from "./components/CardList";
 import ErrorBoundary from "@/components/common/ErrorBoundary";
 import useCardSearch from "./hooks/useCardSearch";
 import Spinner from "@/components/common/Spinner";
+import SearchForm from "./components/SearchForm";
 
 export default function Cards() {
-  const { triggerRef, cards, setSearch, isLoading, error } = useCardSearch();
+  const {
+    triggerRef,
+    cards,
+    setSearch,
+    isLoading,
+    error,
+    isFetchingNextPage,
+    refetch,
+  } = useCardSearch();
   return (
     <main className="space-y-4 p-4">
-      <div className="flex gap-2">
-        <input
-          type="text"
-          className="flex-1 rounded border p-2"
-          placeholder="카드 검색..."
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
+      <SearchForm onSearch={setSearch} />
 
       <ErrorBoundary>
-        {error && <span>{error}</span>}
-        <CardList cards={cards} />
-        {isLoading && <Spinner />}
+        {error && (
+          <>
+            <span>{error}</span>
+            <button type="button" onClick={() => refetch()}>
+              재시도
+            </button>
+          </>
+        )}
+        {isLoading ? <span>임시 스켈레톤</span> : <CardList cards={cards} />}
+        {isFetchingNextPage && <Spinner />}
       </ErrorBoundary>
 
       <div ref={triggerRef} />

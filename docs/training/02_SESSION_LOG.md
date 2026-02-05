@@ -44,8 +44,6 @@
     - **Step 2**: Query Key & State (`useState` + `["cards", search]`).
     - **Step 3**: Debounce (`useDebounce` Custom Hook 직접 구현 및 `ignore` 패턴 학습).
     - **Step 4**: Infinite Scroll (`useInfiniteQuery` + `flatMap` + `useIntersection` Native Hook 구현).
-- **Takeaway**:
-  - "React Query의 `queryFn`은 Context 객체를 주입하므로, 인자가 불일치할 경우 래퍼 함수(`() => func()`)가 필수다."
-  - "`useInfiniteQuery`의 데이터 구조는 `pages` 배열(2차원)이므로 `flatMap`으로 평탄화해야 한다."
-  - "Server Action은 클라이언트 컴포넌트에서 서버 환경변수를 안전하게 쓰기 위한 '택배 기사'다."
-- **Next Step**: Error/Loading UI Refinement (Skeleton 등) 및 Mutation 맛보기.
+  - **UX Refinement**: `isFetchingNextPage` 및 `refetch`를 활용한 로딩/에러 복구 UI 구현.
+  - **Robust Forms**: `React Hook Form` + `Zod`로 유효성 검사 로직(Schema)과 UI를 분리하여 견고한 검색 시스템 구축.
+- **Next Step**: Phase 4 - Quality Assurance (Testing with Vitest) or Real-world Practice.
