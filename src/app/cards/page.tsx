@@ -5,6 +5,7 @@ import ErrorBoundary from "@/components/common/ErrorBoundary";
 import useCardSearch from "./hooks/useCardSearch";
 import Spinner from "@/components/common/Spinner";
 import SearchForm from "./components/SearchForm";
+import { useToast } from "@/providers/toast-provider";
 
 export default function Cards() {
   const {
@@ -16,8 +17,14 @@ export default function Cards() {
     isFetchingNextPage,
     refetch,
   } = useCardSearch();
+
+  const { showToast } = useToast();
+
   return (
     <main className="space-y-4 p-4">
+      <button type="button" onClick={() => showToast("hello")}>
+        토스트
+      </button>
       <SearchForm onSearch={setSearch} />
 
       <ErrorBoundary>

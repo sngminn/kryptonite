@@ -1,5 +1,6 @@
 import { QueryProvider } from "@/providers/query-provider";
 import "./globals.css";
+import ToastProvider from "@/providers/toast-provider";
 
 export default function RootLayout({
   children,
@@ -9,7 +10,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`bg-black antialiased`}>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </QueryProvider>
       </body>
     </html>
   );
