@@ -35,6 +35,7 @@
 ## Phase 4: Quality Assurance (품질)
 
 - [/] **Vitest**: Unit Testing (createStore.ts 시작) 🚧
+- ⬜ **Playwright**: E2E Testing (Critical User Flows)
 - ⬜ **Storybook**: Component Documentation
 
 ## Phase 5: Deployment (DevOps)
